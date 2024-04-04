@@ -9,8 +9,8 @@ class Window:
         self.__root.title("Maze Solver")
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
 
-        self.canvas = Canvas()
-        self.canvas.pack()
+        self.__canvas = Canvas()
+        self.__canvas.pack()
 
         self.running = False
 
@@ -27,4 +27,4 @@ class Window:
         self.running = False
 
     def draw_line(self, line, fill_color):
-        line.draw(self.canvas, fill_color)
+        line.draw(self.__canvas, fill_color)

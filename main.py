@@ -10,7 +10,7 @@ def main():
     p2 = Point(200, 100)
 
     l1 = Line(p1, p2)
-    l1.draw(win.canvas, "red")
+    win.draw_line(l1, "black")
 
     win.wait_for_close()
 
