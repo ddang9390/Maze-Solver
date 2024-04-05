@@ -13,8 +13,17 @@ def main():
     l1 = Line(p1, p2)
     #win.draw_line(l1, "black")
 
-    c = Cell(100, 200, 100, 200, win)
-    c.draw()
+    c1 = Cell(50, 200, 50, 200, win)
+    c1.has_bottom_wall = False
+    c1.has_right_wall = False    
+    c1.draw("black")
+
+    c2 = Cell(125, 200, 125, 200, win)
+    c2.has_bottom_wall = False
+    c2.has_right_wall = False    
+    c2.draw("black")
+
+    c1.draw_move(c2)
 
     win.wait_for_close()
 

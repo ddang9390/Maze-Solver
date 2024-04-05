@@ -6,7 +6,7 @@ class Line:
         self.p1 = p1
         self.p2 = p2
 
-    def draw(self, canvas, fill_color):
+    def draw(self, canvas, fill_color="black"):
         x1 = self.p1.x
         y1 = self.p1.y
         x2 = self.p2.x
