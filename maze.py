@@ -36,18 +36,30 @@ class Maze:
             sizeY = self.y1
 
         for cell in self.cells:
-            self._draw_cell(cell.x1, cell.y1)
+            self._draw_cell(cell.x1, cell.y1, cell)
 
-    def _draw_cell(self, i, j):
+    def _draw_cell(self, i, j, cell):
         x2 = i + self.cell_size_x
-        y2 = j - self.cell_size_y
+        y2 = j + self.cell_size_y
 
-        c = Cell(self.win, i, x2, j, y2)
+        #print(f"({i},{j}), ({x2}, {y2})")
+        #c = Cell(self.win, i, x2, j, y2)
+        cell.x1 = i
+        cell.y1 = j
+        cell.x2 = x2
+        cell.y2 = y2
 
-        c.draw()
-        self._animate()
+        cell.draw()
+        #self._animate()
 
 
     def _animate(self):
         self.win.redraw()
         time.sleep(0.05)
+
+    def _break_entrance_and_exit(self):
+        self.cells[0].has_top_wall = False
+        self._draw_cell(self.cells[0].x1, self.cells[0].y1, self.cells[0])
+        self.cells[len(self.cells)-1].has_bottom_wall = False
+        self._draw_cell(self.cells[len(self.cells)-1].x1, self.cells[len(self.cells)-1].y1, self.cells[len(self.cells)-1])
+
