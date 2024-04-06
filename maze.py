@@ -21,6 +21,8 @@ class Maze:
         self.cell_size_y = cell_size_y
         self.win = win
 
+        self._create_cells()
+
     def _create_cells(self):
         sizeX = self.x1
         sizeY = self.y1
