@@ -134,4 +134,8 @@ class Maze:
 
             self._break_walls(coord[0], coord[1])
 
+    def reset_cells_visited(self):
+        for x in range(0, self.num_rows):
+            for y in range(0,self.num_cols):
+                self.cells[x][y].visited = False
         
