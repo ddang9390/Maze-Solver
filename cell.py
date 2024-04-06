@@ -15,6 +15,8 @@ class Cell:
         self.y2 = y2
         self.win = win
 
+        self.visited = False
+
     def draw(self, color="black"):
         if self.has_left_wall:
             l = Line(Point(self.x1, self.y1), Point(self.x1, self.y2))
