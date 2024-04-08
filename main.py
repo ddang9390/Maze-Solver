@@ -29,6 +29,7 @@ def main():
     #    for y in range(0, maze.num_cols):
     maze._break_walls(0, 0)
     maze.reset_cells_visited()
+    maze.solve()
     
     win.wait_for_close()
 
