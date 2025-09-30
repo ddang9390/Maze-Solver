@@ -7,16 +7,15 @@ from maze_solver import MazeSolver
 
 def main():
     #TODO - allow for num of rows not equaling num of cols
-    num_rows = 6
-    num_cols = 6
+    num_rows = 10
+    num_cols = 10
     margin = 30
     
     cell_size_x = 30
     cell_size_y = 30
 
-    #TODO - fix screen size, seems to do nothing
-    screen_x = 10
-    screen_y = 1000
+    screen_x = (1.5 * cell_size_x) * num_rows
+    screen_y = (1.5 * cell_size_y) * num_cols
     win = Window(screen_x, screen_y)
 
     # Create maze

@@ -9,7 +9,7 @@ class Window:
         self.__root.title("Maze Solver")
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
 
-        self.__canvas = Canvas()
+        self.__canvas = Canvas(self.__root, width=self.width, height=self.height)
         self.__canvas.pack()
 
         self.running = False
