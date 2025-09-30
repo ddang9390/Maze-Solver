@@ -27,7 +27,7 @@ class Tests(unittest.TestCase):
         num_cols = 6
         num_rows = 100
         m1 = Maze(0, 0, num_rows, num_cols, 10, 10, self.win)
-        m1._break_walls(0, 0)
+        m1.break_walls(0, 0)
         m1.reset_cells_visited()
         for col in m1.cells:
             for cell in col:
