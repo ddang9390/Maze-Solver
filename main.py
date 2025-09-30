@@ -5,21 +5,22 @@ from cell import Cell
 from maze import Maze
 from maze_solver import MazeSolver
 
-def main():
-    #TODO - allow for num of rows not equaling num of cols
-    num_rows = 10
-    num_cols = 10
-    margin = 30
-    
-    cell_size_x = 30
-    cell_size_y = 30
+# Constants
+CELL_SIZE_X = 30
+CELL_SIZE_Y = 30
+MARGIN = 30
 
-    screen_x = (1.5 * cell_size_x) * num_rows
-    screen_y = (1.5 * cell_size_y) * num_cols
+def main():
+    #TODO - allow for num of rows not equaling num of cols, allow for user input
+    num_rows = 5
+    num_cols = 5
+
+    screen_x = (2 * CELL_SIZE_X) * num_rows
+    screen_y = (1.5 * CELL_SIZE_Y) * num_cols
     win = Window(screen_x, screen_y)
 
     # Create maze
-    maze = Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win)
+    maze = Maze(MARGIN, MARGIN, num_rows, num_cols, CELL_SIZE_X, CELL_SIZE_Y, win)
     maze.break_entrance_and_exit()
     maze.break_walls(0, 0)
     maze.reset_cells_visited()
