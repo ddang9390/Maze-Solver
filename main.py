@@ -24,6 +24,7 @@ def main():
     maze.break_entrance_and_exit()
     maze.break_walls(0, 0)
     maze.reset_cells_visited()
+    win.maze = maze
 
     # Solve maze
     maze_solver = MazeSolver(maze)

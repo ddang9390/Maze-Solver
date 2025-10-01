@@ -1,5 +1,6 @@
 import time
-from tkinter import Tk, BOTH, Canvas
+from tkinter import Tk, Canvas, Button
+from maze_solver import MazeSolver
 
 class Window:
     def __init__(self, width, height):
@@ -12,12 +13,16 @@ class Window:
         self.canvas = Canvas(self.root, width=self.width, height=self.height)
         self.canvas.pack()
 
+        self.maze = None
         self.finished = False
 
         # Timer related variables
         self.timer = None
         self.start_time = None
         self.init_timer()
+
+        # Buttons
+        self.create_buttons()
 
     # Update maze while it is being solved
     def redraw(self):
@@ -48,3 +53,22 @@ class Window:
     def update_timer(self):
         elapsed_time = time.perf_counter() - self.start_time
         self.canvas.itemconfigure(self.timer, text=f"{elapsed_time: 0.2f}s")
+
+    def create_buttons(self):
+        resolve_button = Button(self.root, text="Solve Again", command=self.resolve_func)
+        resolve_button.pack(side='bottom')
+
+    def resolve_func(self):
+        self.canvas.delete("all")
+        self.maze.reset_cells_visited()
+        self.maze.create_cells()
+        self.finished = False
+
+         # Timer related variables
+        self.timer = None
+        self.start_time = None
+        self.init_timer()
+
+        maze_solver = MazeSolver(self.maze)
+        maze_solver.solve()
+        self.wait_for_close()

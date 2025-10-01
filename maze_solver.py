@@ -1,4 +1,3 @@
-
 class MazeSolver:
     def __init__(self, maze, algorithm=''):
         self.maze = maze
@@ -17,7 +16,6 @@ class MazeSolver:
         if i == self.num_cols-1 and j == self.num_rows-1:
             return True
         
-
         #Vertical Movement
         if (j-1) > 0:
             if not self.cells[i][j-1].visited and not self.cells[i][j-1].has_bottom_wall:
