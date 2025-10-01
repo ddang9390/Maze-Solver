@@ -1,5 +1,5 @@
 import time
-from tkinter import Tk, Canvas, Button
+from tkinter import Tk, Canvas, Button, Frame
 from maze_solver import MazeSolver
 
 class Window:
@@ -55,10 +55,20 @@ class Window:
         self.canvas.itemconfigure(self.timer, text=f"{elapsed_time: 0.2f}s")
 
     def create_buttons(self):
-        resolve_button = Button(self.root, text="Solve Again", command=self.resolve_func)
-        resolve_button.pack(side='bottom')
+        button_frame = Frame(self.root)
+        button_frame.pack(expand=True)
 
-    def resolve_func(self):
+        new_maze_button = Button(button_frame, text="New Maze", command=self.resolve_func)
+        dfs_button = Button(button_frame, text="DFS", command=lambda: self.resolve_func('dfs'))
+        bfs_button = Button(button_frame, text="BFS", command=lambda: self.resolve_func('bfs'))
+        astar_button = Button(button_frame, text="A*", command=lambda: self.resolve_func('A*'))
+
+        new_maze_button.pack(side='left')
+        dfs_button.pack(side='left')
+        bfs_button.pack(side='left')
+        astar_button.pack(side='left')
+
+    def resolve_func(self, algorithm=''):
         self.canvas.delete("all")
         self.maze.reset_cells_visited()
         self.maze.create_cells()
