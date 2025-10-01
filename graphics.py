@@ -79,6 +79,6 @@ class Window:
         self.start_time = None
         self.init_timer()
 
-        maze_solver = MazeSolver(self.maze)
+        maze_solver = MazeSolver(self.maze, algorithm=algorithm)
         maze_solver.solve()
         self.wait_for_close()

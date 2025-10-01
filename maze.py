@@ -25,7 +25,7 @@ class Maze:
         for x in range(0, self.num_rows):
             cols = []
             for y in range(0,self.num_cols):
-                c = Cell(self.win, sizeX, None, sizeY)
+                c = Cell(self.win, sizeX, None, sizeY, placement=[x,y])
 
                 cols.append(c)
                 sizeY += self.cell_size_y
@@ -47,6 +47,7 @@ class Maze:
         x2 = x1 + self.cell_size_x
         y2 = y1 + self.cell_size_y
 
+        # The four coordinates that make up a square cell
         self.cells[i][j].x1 = x1
         self.cells[i][j].y1 = y1
         self.cells[i][j].x2 = x2

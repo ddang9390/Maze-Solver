@@ -3,7 +3,7 @@ from line import Line
 from point import Point
 
 class Cell:
-    def __init__(self, win, x1=None, x2=None, y1=None, y2=None, has_left_wall=True, has_right_wall=True, has_top_wall=True, has_bottom_wall=True):
+    def __init__(self, win, x1=None, x2=None, y1=None, y2=None, has_left_wall=True, has_right_wall=True, has_top_wall=True, has_bottom_wall=True, placement=[]):
         self.has_left_wall = has_left_wall
         self.has_right_wall = has_right_wall
         self.has_top_wall = has_top_wall
@@ -16,7 +16,8 @@ class Cell:
         self.win = win
 
         self.visited = False
-
+        self.placement = placement
+        
     def draw(self, color="black"):
         if self.has_left_wall:
             l = Line(Point(self.x1, self.y1), Point(self.x1, self.y2))
