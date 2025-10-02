@@ -1,6 +1,7 @@
 # Purpose - To solve a given maze using the selected algorithm
 
 import time
+from heuristics import *
 
 class MazeSolver:
     def __init__(self, maze, algorithm=''):
@@ -13,6 +14,8 @@ class MazeSolver:
     def solve(self):
         if self.algorithm == 'bfs':
             return self.solve_BFS()
+        if self.algorithm == 'A*':
+            return self.solve_astar()
         return self.solve_DFS(0, 0)
 
     def solve_DFS(self, i=0, j=0):
@@ -74,8 +77,7 @@ class MazeSolver:
             if not current_cell.has_left_wall and x - 1 >= 0:
                 if not self.cells[x-1][y].visited:
                     queue.append(self.cells[x-1][y])
-                    current_cell.draw_move(self.cells[x-1][y])
-                    
+                    current_cell.draw_move(self.cells[x-1][y])       
 
             if not current_cell.has_right_wall and x + 1 < self.num_cols:
                 if not self.cells[x+1][y].visited:
@@ -98,3 +100,74 @@ class MazeSolver:
             self.maze.win.redraw()
             time.sleep(0.0005)
 
+    def solve_astar(self):
+        self.maze.animate()
+        queue = []
+
+        start = self.cells[0][0]
+        goal = self.cells[self.num_cols-1][self.num_rows-1]
+
+        queue.append(start)
+        start.visited = True
+        g_score = {start: 0}
+        h_score = {start: manhattan_dist(start, goal)}
+        path = None
+        while queue:
+            current_cell = min(queue, key=lambda item: item.f)
+            
+            x, y = current_cell.placement[0], current_cell.placement[1]
+            if x == self.num_cols-1 and y == self.num_rows-1:
+                path = current_cell
+                break
+            
+            queue.remove(current_cell)
+            current_cell.visited = True
+
+            # Gather neighbors
+            neighbors = []
+            if not current_cell.has_left_wall and x - 1 >= 0:
+                if not self.cells[x-1][y].visited:
+                    neighbors.append(self.cells[x-1][y])
+
+            if not current_cell.has_right_wall and x + 1 < self.num_cols:
+                if not self.cells[x+1][y].visited:
+                    neighbors.append(self.cells[x+1][y])
+
+            if not current_cell.has_top_wall and y - 1 >= 0:
+                if not self.cells[x][y-1].visited:
+                    neighbors.append(self.cells[x][y-1])
+
+            if not current_cell.has_bottom_wall and y + 1 < self.num_rows:
+                if not self.cells[x][y+1].visited:
+                    neighbors.append(self.cells[x][y+1])
+
+            for neighbor in neighbors:
+                if neighbor.visited:
+                    continue
+
+                # Estimated cost from current location to goal
+                h_val = manhattan_dist(neighbor, goal)
+
+                tentative_g = g_score[current_cell] + 1
+                if neighbor not in queue:
+                    queue.append(neighbor)
+                elif tentative_g >= g_score[neighbor]:
+                    continue
+                
+                neighbor.parent = current_cell
+                g_score[neighbor] = tentative_g
+                h_score[neighbor] = h_val
+                neighbor.f = g_score[neighbor] + h_score[neighbor]
+
+        true_path = []
+        while path is not None:
+            true_path.append(path)
+            path = path.parent
+
+        true_path.reverse()
+        for n in range(0, len(true_path)):
+            if n+1 < len(true_path):
+                true_path[n].draw_move(true_path[n+1])
+                self.maze.win.redraw()
+                time.sleep(0.05)
+            
