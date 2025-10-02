@@ -1,3 +1,5 @@
+# Purpose - To draw cells for a grid and lines showing movement between the cells
+
 from tkinter import Tk, BOTH, Canvas
 from line import Line
 from point import Point

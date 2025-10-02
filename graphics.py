@@ -1,3 +1,5 @@
+# Purpose - The GUI that the maze will take place in
+
 import time
 from tkinter import Tk, Canvas, Button, Frame
 from maze_solver import MazeSolver

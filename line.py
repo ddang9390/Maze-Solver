@@ -1,3 +1,5 @@
+# Purpose - The lines that would be drawn on the canvas
+
 from point import Point
 from tkinter import Tk, BOTH, Canvas
 

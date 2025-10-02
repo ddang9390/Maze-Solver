@@ -1,3 +1,5 @@
+# Purpose - To solve a given maze using the selected algorithm
+
 import time
 
 class MazeSolver:
@@ -95,3 +97,4 @@ class MazeSolver:
             #        in a while loop causing inaccurate results
             self.maze.win.redraw()
             time.sleep(0.0005)
+

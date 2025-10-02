@@ -1,3 +1,5 @@
+# Purpose - To create a maze
+
 from cell import Cell
 import time
 import random
