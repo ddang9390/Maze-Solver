@@ -60,7 +60,7 @@ class Window:
         button_frame = Frame(self.root)
         button_frame.pack(expand=True)
 
-        new_maze_button = Button(button_frame, text="New Maze", command=self.resolve_func)
+        new_maze_button = Button(button_frame, text="New Maze", command=self.reset_maze)
         dfs_button = Button(button_frame, text="DFS", command=lambda: self.resolve_func('dfs'))
         bfs_button = Button(button_frame, text="BFS", command=lambda: self.resolve_func('bfs'))
         astar_button = Button(button_frame, text="A*", command=lambda: self.resolve_func('A*'))
@@ -84,3 +84,10 @@ class Window:
         maze_solver = MazeSolver(self.maze, algorithm=algorithm)
         maze_solver.solve()
         self.wait_for_close()
+
+    def reset_maze(self):
+        self.canvas.delete("all")
+        self.maze.refresh_maze()
+        self.maze.break_entrance_and_exit()
+        self.maze.break_walls(0, 0)
+        self.maze.reset_cells_visited()

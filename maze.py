@@ -21,6 +21,11 @@ class Maze:
 
         self.create_cells()
 
+    def refresh_maze(self):
+        self.cells = []
+        self.visited = []
+        self.create_cells()
+
     def create_cells(self):
         sizeX = self.x1
         sizeY = self.y1
