@@ -70,35 +70,38 @@ class MazeSolver:
 
         while queue:
             current_cell = queue.pop(0)
+            current_cell.visited = True
             x, y = current_cell.placement[0], current_cell.placement[1]
             if x == self.num_cols-1 and y == self.num_rows-1:
                 return True
             
             if not current_cell.has_left_wall and x - 1 >= 0:
-                if not self.cells[x-1][y].visited:
-                    queue.append(self.cells[x-1][y])
-                    current_cell.draw_move(self.cells[x-1][y])       
+                left_move = self.cells[x-1][y]
+                if not left_move.visited:
+                    queue.append(left_move)
+                    current_cell.draw_move(left_move)       
 
             if not current_cell.has_right_wall and x + 1 < self.num_cols:
-                if not self.cells[x+1][y].visited:
-                    queue.append(self.cells[x+1][y])
-                    current_cell.draw_move(self.cells[x+1][y])
+                right_move = self.cells[x+1][y]
+                if not right_move.visited:
+                    queue.append(right_move)
+                    current_cell.draw_move(right_move)
                 
 
             if not current_cell.has_top_wall and y - 1 >= 0:
-                if not self.cells[x][y-1].visited:
-                    queue.append(self.cells[x][y-1])
-                    current_cell.draw_move(self.cells[x][y-1])
+                up_move = self.cells[x][y-1]
+                if not up_move.visited:
+                    queue.append(up_move)
+                    current_cell.draw_move(up_move)
 
             if not current_cell.has_bottom_wall and y + 1 < self.num_rows:
-                if not self.cells[x][y+1].visited:
-                    queue.append(self.cells[x][y+1])
-                    current_cell.draw_move(self.cells[x][y+1])
+                down_move = self.cells[x][y+1]
+                if not down_move.visited:
+                    queue.append(down_move)
+                    current_cell.draw_move(down_move)
 
-            # TODO - find alternative to animating path, the time.sleep works differently
-            #        in a while loop causing inaccurate results
-            self.maze.win.redraw()
-            time.sleep(0.0005)
+            self.maze.animate()
+
 
     def solve_astar(self):
         self.maze.animate()
@@ -168,6 +171,6 @@ class MazeSolver:
         for n in range(0, len(true_path)):
             if n+1 < len(true_path):
                 true_path[n].draw_move(true_path[n+1])
-                self.maze.win.redraw()
-                time.sleep(0.05)
+                self.maze.animate()
+                
             
