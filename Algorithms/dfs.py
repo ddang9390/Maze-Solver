@@ -1,6 +1,16 @@
 # Purpose - Solve the maze using the DFS algorithm
 
 def solve_DFS(maze_solver, i=0, j=0):
+    """
+    Solves the maze using the DFS algorithm
+
+    Arguments:
+        maze_solver (MazeSolver) - Program that will be using the function to solve the maze
+
+    Returns:
+        bool: True if solution was found, False if not
+    """
+
     maze_solver.maze.animate()
     maze_solver.cells[i][j].visited = True
 

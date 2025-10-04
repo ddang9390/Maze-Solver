@@ -3,6 +3,16 @@
 from Algorithms.heuristics import *
 
 def solve_astar(maze_solver):
+    """
+    Solves the maze using the A* algorithm
+
+    Arguments:
+        maze_solver (MazeSolver) - Program that will be using the function to solve the maze
+
+    Returns:
+        bool: True if solution was found, False if not
+    """    
+
     maze_solver.maze.animate()
     queue = []
 

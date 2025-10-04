@@ -1,11 +1,18 @@
 # Purpose - Solve the maze using the BFS algorithm
 
 def solve_BFS(maze_solver):
+    """
+    Solves the maze using the BFS algorithm
+
+    Arguments:
+        maze_solver (MazeSolver) - Program that will be using the function to solve the maze
+
+    Returns:
+        bool: True if solution was found, False if not
+    """
     maze_solver.maze.animate()
 
     start = maze_solver.cells[0][0]
-    goal = maze_solver.cells[maze_solver.num_cols-1][maze_solver.num_rows-1]
-
     queue = []
     queue.append(start)
     start.visited = True
@@ -43,3 +50,5 @@ def solve_BFS(maze_solver):
                 current_cell.draw_move(down_move)
 
         maze_solver.maze.animate()
+
+    return False

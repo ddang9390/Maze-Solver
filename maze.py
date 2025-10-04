@@ -5,9 +5,25 @@ import time
 import random
 
 class Maze:
+    """
+    Represents a randomly generated maze
+
+    Attributes:
+        cells (list): List of cells
+        x1 (int)
+        y1 (int)
+        num_cols (int): Number of columns
+        num_rows (int): Number of rows
+        algorithm (str): Indentifier for the algorithm to be used
+        cell_size_x (int)
+        cell_size_y (int)
+    """
     def __init__(self, x1, y1, num_rows, num_cols,
                 cell_size_x, cell_size_y, win
     ):
+        """
+        Initializes the maze
+        """
         self.cells = []
         self.x1 = x1
         self.y1 = y1
@@ -22,11 +38,17 @@ class Maze:
         self.create_cells()
 
     def refresh_maze(self):
+        """
+        Refreshes the maze
+        """
         self.cells = []
         self.visited = []
         self.create_cells()
 
     def create_cells(self):
+        """
+        Creates the cells in the maze
+        """
         sizeX = self.x1
         sizeY = self.y1
         for x in range(0, self.num_rows):
@@ -46,6 +68,9 @@ class Maze:
                 self.draw_cell(x, y)
 
     def draw_cell(self, i, j):
+        """
+        Actually draw the cells in the maze
+        """
         x2 = i + self.cell_size_x
         y2 = j + self.cell_size_y
 
@@ -64,10 +89,16 @@ class Maze:
 
 
     def animate(self):
+        """
+        Animates the drawing process
+        """
         self.win.redraw()
         time.sleep(0.05)
 
     def break_entrance_and_exit(self):
+        """
+        Creates the entrance and exit for the maze
+        """
         self.cells[0][0].has_top_wall = False
         self.draw_cell(0, 0)
 
@@ -77,6 +108,13 @@ class Maze:
 
 
     def break_walls(self, i, j):
+        """
+        Breaks random walls in the maze
+
+        Arguments:
+            i (int): x coordinate of the cell in a grid
+            j (int): y coordinate of the cell in a grid
+        """
         self.cells[i][j].visited = True
         while True:
             to_visit = []
@@ -124,6 +162,9 @@ class Maze:
             self.break_walls(coord[0], coord[1])
 
     def reset_cells_visited(self):
+        """
+        Mark all cells in the maze as not being visited yet
+        """
         for x in range(0, self.num_rows):
             for y in range(0,self.num_cols):
                 self.cells[x][y].visited = False
