@@ -81,3 +81,5 @@ def solve_astar(maze_solver):
         if n+1 < len(true_path):
             true_path[n].draw_move(true_path[n+1])
             maze_solver.maze.animate()
+
+    return len(true_path) > 0

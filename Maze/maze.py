@@ -1,6 +1,6 @@
 # Purpose - To create a maze
 
-from cell import Cell
+from Graphics.cell import Cell
 import time
 import random
 
@@ -10,13 +10,13 @@ class Maze:
 
     Attributes:
         cells (list): List of cells
-        x1 (int)
-        y1 (int)
+        x1 (int): x-coordinate of top left corner
+        y1 (int): y-coordinate of top left corner
         num_cols (int): Number of columns
         num_rows (int): Number of rows
         algorithm (str): Indentifier for the algorithm to be used
-        cell_size_x (int)
-        cell_size_y (int)
+        cell_size_x (int): How wide a cell is
+        cell_size_y (int): How tall a cell is
     """
     def __init__(self, x1, y1, num_rows, num_cols,
                 cell_size_x, cell_size_y, win
@@ -70,6 +70,10 @@ class Maze:
     def draw_cell(self, i, j):
         """
         Actually draw the cells in the maze
+
+        Arguments:
+            i (int): x-coordinate of cell in a grid
+            j (int): y-coordinate of cell in a grid
         """
         x2 = i + self.cell_size_x
         y2 = j + self.cell_size_y
@@ -109,7 +113,11 @@ class Maze:
 
     def break_walls(self, i, j):
         """
-        Breaks random walls in the maze
+        Breaks random walls in the maze through recursive backtracking
+
+        Starts at a cell of coordinates (i, j), randomly chooses un unvisited neighbor,
+        and breaks the wall between them. Then calls itself recursively on the neighbor
+        and continue this process until all cells have been visited.
 
         Arguments:
             i (int): x coordinate of the cell in a grid
@@ -119,7 +127,7 @@ class Maze:
         while True:
             to_visit = []
 
-            #Vertical Movement
+            # Check vertical neighbors
             if (j-1) > 0:
                 if not self.cells[i][j-1].visited:
                     to_visit.append([i, j-1])
@@ -127,7 +135,7 @@ class Maze:
                 if not self.cells[i][j+1].visited:
                     to_visit.append([i, j+1])
 
-            #Horizontal Movement:
+            # Check horizontal neighbors
             if (i-1) > 0:
                 if not self.cells[i-1][j].visited:
                     to_visit.append([i-1, j])
@@ -135,25 +143,27 @@ class Maze:
                 if not self.cells[i+1][j].visited:
                     to_visit.append([i+1, j])
 
+            # Returns when there are no more cells to visit
             if len(to_visit) == 0:
                 return
 
+            # Randomly choose a neighbor
             ran_index = random.randrange(0, len(to_visit))
             coord = to_visit[ran_index]
 
-            # right
+            # Moving right
             if coord[0] == i + 1:
                 self.cells[i][j].has_right_wall = False
                 self.cells[i + 1][j].has_left_wall = False
-            # left
+            # Moving left
             if coord[0] == i - 1:
                 self.cells[i][j].has_left_wall = False
                 self.cells[i - 1][j].has_right_wall = False
-            # down
+            # Moving down
             if coord[1] == j + 1:
                 self.cells[i][j].has_bottom_wall = False
                 self.cells[i][j + 1].has_top_wall = False
-            # up
+            # Moving up
             if coord[1] == j - 1:
                 self.cells[i][j].has_top_wall = False
                 self.cells[i][j - 1].has_bottom_wall = False

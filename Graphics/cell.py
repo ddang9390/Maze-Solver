@@ -1,7 +1,7 @@
 # Purpose - To draw cells for a grid and lines showing movement between the cells
 
-from line import Line
-from point import Point
+from Graphics.line import Line
+from Graphics.point import Point
 
 class Cell:
     """

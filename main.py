@@ -1,5 +1,5 @@
-from graphics import Window
-from maze import Maze
+from Graphics.graphics import Window
+from Maze.maze import Maze
 
 # Constants
 NUM_ROWS = 8
